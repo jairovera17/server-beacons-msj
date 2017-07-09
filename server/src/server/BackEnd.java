@@ -11,6 +11,8 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Random;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,14 +23,19 @@ import java.util.logging.Logger;
 public class BackEnd {
     
      public static void main(String[] args){
-        BackBeacon backBeacon = new BackBeacon();
-        backBeacon.backBeacons();
+        
+        iniciarBackEnd();
      
     }
+     
+     private static void iniciarBackEnd(){
+         ExecutorService ex = Executors.newCachedThreadPool();
+         ex.submit(new BackBeacon());
+     }
     
     
     
-    public static class BackBeacon{
+    public static class BackBeacon implements Runnable{
         
         int id = 10;
         int portNumber = 5000;
@@ -64,6 +71,11 @@ public class BackEnd {
             Logger.getLogger(BackEnd.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        }
+
+        @Override
+        public void run() {
+        backBeacons();
         }
         
         

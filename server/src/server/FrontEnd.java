@@ -15,6 +15,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Queue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,6 +28,8 @@ import java.util.logging.Logger;
 public class FrontEnd {
     
     static ArrayList<backEndStatus> registro;
+    static Queue<Mensaje>cola;
+    
     
     
      public static void main(String[] args){
@@ -32,7 +37,14 @@ public class FrontEnd {
     }
      
      private static void iniciarFrontServer(){
-         iniciarFrontBeacons();
+         
+         
+         
+         ExecutorService ex = Executors.newCachedThreadPool();
+         ex.submit(new FrontBeacon());
+         ex.submit(new FrontMsj());
+         
+         
      }
      
      private static void iniciarFrontBeacons(){
@@ -40,12 +52,37 @@ public class FrontEnd {
          frontbeacon.frontBeacons();
          
      }
+     
    
     
     
+    public static class FrontMsj implements Runnable{
+        private int portNumber=4200;
+        
+        @Override
+        public void run() {
+            recibirMsj();
+         }
+        
+        private void recibirMsj(){
+            try {
+                ExecutorService ex = Executors.newCachedThreadPool();
+                ServerSocket serverMsjSocket = new ServerSocket(portNumber);
+                do{
+                    System.out.print("khe");
+                   Socket socket = serverMsjSocket.accept();
+                   System.out.print("alooooo");
+                   socket.close();
+                    
+                }while(true);
+            } catch (IOException ex1) {
+                Logger.getLogger(FrontEnd.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        }
     
+    }
     
-    public static class FrontBeacon{
+    public static class FrontBeacon implements Runnable{
         
         private int portNumber=5000;
         private consolaBeacon consola;
@@ -105,6 +142,11 @@ public class FrontEnd {
                 Logger.getLogger(FrontEnd.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+
+        @Override
+        public void run() {
+            frontBeacons();
+          }
         
     }
     class FrontMSJ{
