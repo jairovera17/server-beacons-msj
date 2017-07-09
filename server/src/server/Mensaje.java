@@ -5,6 +5,8 @@
  */
 package server;
 
+import java.net.Socket;
+
 /**
  *
  * @author jairo
@@ -13,5 +15,6 @@ public class Mensaje {
     public String userName;
     public String userPassword;
     public String userMsj;
+    public Socket userSocket;
     
 }

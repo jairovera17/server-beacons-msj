@@ -94,21 +94,7 @@ public class consolaBeacon {
     }
 
     ArrayList<backEndStatus> refreshRegistro(ArrayList<backEndStatus> registro, backEndStatus nuevoRegistro, double tiempoLimite) {
-        /*boolean nuevo =true;
-        for (backEndStatus registroTemp: registro){
-            double lastRegister = System.currentTimeMillis()-registroTemp.lastLog;
-            
-            if(registroTemp.id==nuevoRegistro.id){
-                registroTemp.lastLog=nuevoRegistro.lastLog;
-                nuevo=false;
-            }
-            
-            if(lastRegister>=(tiempoLimite*1000)){
-                registro.remove(registroTemp);
-            }
-            
-            
-        }*/
+      
         ArrayList<backEndStatus> salida = new ArrayList<>();
         boolean nuevo = true;
         for(int i=0;i<registro.size();i++){
