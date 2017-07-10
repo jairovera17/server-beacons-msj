@@ -15,6 +15,7 @@ public class Mensaje {
     public String userName;
     public String userPassword;
     public String userMsj;
+    public String userCipher;
     public Socket userSocket;
     
 }

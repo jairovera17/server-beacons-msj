@@ -25,8 +25,8 @@ public class BackBeacon implements Runnable{
         String localname = "127.0.0.10";
         backEndStatus backStatus;
         
-        public BackBeacon(){
-            backStatus = new backEndStatus(new Random().nextInt()%100+50, localname, 0);
+        public BackBeacon(int id){
+            backStatus = new backEndStatus(id, localname, 0);
         }
         
         private void backBeacons(){
@@ -43,7 +43,7 @@ public class BackBeacon implements Runnable{
             
             out.println(backStatus.toString());
             ack = in.readLine();
-            System.out.println("Front dice: "+ack);
+           System.out.println("Front dice: "+ack);
             
             
             }while(true);

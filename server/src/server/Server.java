@@ -5,6 +5,8 @@
  */
 package server;
 
+import BaseDatos.ConexionBDD;
+
 /**
  *
  * @author jairo
@@ -15,7 +17,14 @@ public class Server {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("hola");
+        ConexionBDD miBDD = new ConexionBDD();
+        if(miBDD.validarUsuario("Jairo", "jairo")){
+            for (int i = 0; i < 3; i++) {
+                miBDD.almacenarMensaje("Jairo","hail","pulpos");
+            }
+    
+        }
+        
     }
     
 }

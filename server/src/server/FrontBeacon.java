@@ -54,11 +54,7 @@ public class FrontBeacon implements Runnable{
                     else{
                         Singleton.getInstance().registro = new ArrayList<backEndStatus>();
                     }
-                   /*   DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-                Date date = new Date();
-                System.out.print(dateFormat.format(date)); //2016/11/16 12:08:43
-                 System.out.println("\tServidores backEnd activos: "+registro.size());*/
-                
+                 
                     
                      Thread.sleep(sleepTime);
                     Socket socket = serversock.accept();

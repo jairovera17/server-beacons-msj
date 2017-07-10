@@ -61,19 +61,20 @@ public class FrontRecvMsj implements Runnable{
             
             consolaMSJ consola = new consolaMSJ();
             PrintWriter out = null;
+            BufferedReader in=null;
                 try {
                     out = new PrintWriter(clientSocket.getOutputStream(), true);
-                    BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                    in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                     
                     String msj = in.readLine();
                     Mensaje nuevoMensaje =consola.parsearMensaje(msj,clientSocket);
+                    
                     Singleton.getInstance().inputColaMsj.add(nuevoMensaje);
+                   
                     
                 } catch (IOException ex) {
                     Logger.getLogger(FrontRecvMsj.class.getName()).log(Level.SEVERE, null, ex);
-                } finally {
-                    out.close();
-                }
+                } 
             
         }
             

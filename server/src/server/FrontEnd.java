@@ -34,10 +34,19 @@ public class FrontEnd {
      private static void iniciarFrontServer() {
          
          
-         
+         Singleton.getInstance();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(FrontEnd.class.getName()).log(Level.SEVERE, null, ex);
+        }
          ExecutorService ex = Executors.newCachedThreadPool();
          ex.submit(new FrontBeacon());
+         ex.submit(new FrontBack());
+         ex.submit(new FrontSendMsj());
          ex.submit(new FrontRecvMsj());
+   
+
          statusBack();
         
          
@@ -51,6 +60,9 @@ public class FrontEnd {
             
              try {
                  Thread.sleep(1500);
+                System.out.print("input : " +Singleton.getInstance().inputColaMsj.size()); 
+                System.out.println("\toutput :"+ Singleton.getInstance().outputColaMsj.size());
+              
              } catch (InterruptedException ex) {
                  Logger.getLogger(FrontEnd.class.getName()).log(Level.SEVERE, null, ex);
              }
@@ -70,7 +82,7 @@ public class FrontEnd {
            
             
             numServer=numServerAux;
-            System.out.println("Mensajes en cola= "+Singleton.getInstance().inputColaMsj.size());
+            
          }
      }
      

@@ -5,6 +5,7 @@
  */
 package server;
 
+import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -22,7 +23,8 @@ public class BackEnd {
      
      private static void iniciarBackEnd(){
          ExecutorService ex = Executors.newCachedThreadPool();
-         ex.submit(new BackBeacon());
+         ex.submit(new BackBeacon(new Random().nextInt()%100+100));
+         ex.submit(new BackBDD());
      }
     
    

@@ -25,9 +25,13 @@ public class Cliente {
     public static void main(String[] args) {
         try {
             Socket socket = new Socket(hostname,portNumber);
+            
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            out.println("jairo@jairo@hola");
+            out.println("Jairo@jairo@hola");
+           
+            System.out.println(in.readLine());
+          
             
         } catch (IOException ex) {
             Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);

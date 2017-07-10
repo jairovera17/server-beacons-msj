@@ -6,6 +6,7 @@
 package server;
 
 import java.net.Socket;
+import java.util.Queue;
 import java.util.StringTokenizer;
 
 /**
@@ -24,4 +25,23 @@ public class consolaMSJ {
         return respuesta;
         
     }
+    
+    public String cifrar(String plano){
+        int delta=5;
+        char mander [] = plano.toCharArray();
+        
+        for (int i = 0; i < mander.length; i++) {
+            mander[i]=(char) (mander[i]+delta);
+            
+        }
+         return mander+"";
+    }
+
+    void imprimir(Queue<Mensaje> inputColaMsj) {
+        System.out.println("****************************");
+        for (Mensaje temp : inputColaMsj){
+            System.out.println(temp.userName+"\t"+temp.userPassword+"\n"
+            +"normal:\t"+temp.userMsj+"\ncifrado:\t"+temp.userCipher);
+        }
+          }
 }
